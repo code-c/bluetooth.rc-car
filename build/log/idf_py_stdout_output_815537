@@ -1,0 +1,32 @@
+[1/16] Linking C static library esp-idf/protobuf-c/libprotobuf-c.a
+[2/16] Linking C static library esp-idf/fatfs/libfatfs.a
+[3/16] Performing build step for 'bootloader'
+[1/1] cd /home/codec/esp/rc-car/build/bootloader/esp-idf/esptool_py && /home/codec/.espressif/python_env/idf5.2_py3.10_env/bin/python /home/codec/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 /home/codec/esp/rc-car/build/bootloader/bootloader.bin
+Bootloader binary size 0x6890 bytes. 0x770 bytes (7%) free.
+[4/16] Linking C static library esp-idf/protocomm/libprotocomm.a
+[5/16] Linking C static library esp-idf/bluepad32/libbluepad32.a
+[6/16] No install step for 'bootloader'
+[7/16] Linking C static library esp-idf/esp_local_ctrl/libesp_local_ctrl.a
+[8/16] Linking C static library esp-idf/wifi_provisioning/libwifi_provisioning.a
+[9/16] Completed 'bootloader'
+[10/16] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/my_platform.c.obj
+In file included from /home/codec/esp/rc-car/main/my_platform.c:6:
+/home/codec/esp/esp-idf/components/driver/deprecated/driver/mcpwm.h:15:2: warning: #warning "legacy MCPWM driver is deprecated, please migrate to the new driver (include driver/mcpwm_prelude.h)" [-Wcpp]
+   15 | #warning "legacy MCPWM driver is deprecated, please migrate to the new driver (include driver/mcpwm_prelude.h)"
+      |  ^~~~~~~
+/home/codec/esp/rc-car/main/my_platform.c: In function 'my_platform_on_controller_data':
+/home/codec/esp/rc-car/main/my_platform.c:124:18: warning: unused variable 'enabled' [-Wunused-variable]
+  124 |   static uint8_t enabled = true;
+      |                  ^~~~~~~
+[11/16] Linking C static library esp-idf/main/libmain.a
+[12/16] Generating ld/sections.ld
+[13/16] Building C object CMakeFiles/bluepad32_esp32_example_app.elf.dir/project_elf_src_esp32.c.obj
+[14/16] Linking CXX executable bluepad32_esp32_example_app.elf
+[15/16] Generating binary image from built executable
+esptool.py v4.8.1
+Creating esp32 image...
+Merged 2 ELF sections
+Successfully created esp32 image.
+Generated /home/codec/esp/rc-car/build/bluepad32_esp32_example_app.bin
+[16/16] cd /home/codec/esp/rc-car/build/esp-idf/esptool_py && /home/codec/.espressif/python_env/idf5.2_py3.10_env/bin/python /home/codec/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/codec/esp/rc-car/build/partition_table/partition-table.bin /home/codec/esp/rc-car/build/bluepad32_esp32_example_app.bin
+bluepad32_esp32_example_app.bin binary size 0xbbb80 bytes. Smallest app partition is 0x100000 bytes. 0x44480 bytes (27%) free.

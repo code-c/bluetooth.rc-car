@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+/home/codec/esp/rc-car/build/CMakeFiles/bootloader
+/home/codec/esp/rc-car/build/CMakeFiles/bootloader.rule
+/home/codec/esp/rc-car/build/CMakeFiles/bootloader-complete.rule
+/home/codec/esp/rc-car/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/home/codec/esp/rc-car/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/home/codec/esp/rc-car/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/home/codec/esp/rc-car/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/home/codec/esp/rc-car/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/home/codec/esp/rc-car/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/home/codec/esp/rc-car/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

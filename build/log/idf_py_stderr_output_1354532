@@ -1,0 +1,34 @@
+[0;33m--- esp-idf-monitor 1.5.0 on /dev/ttyUSB0 115200[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x40081bf2: panic_abort at /home/codec/esp/esp-idf/components/esp_system/panic.c:466
+0x40093ef1: esp_system_abort at /home/codec/esp/esp-idf/components/esp_system/port/esp_system_chip.c:93
+0x40099ded: __assert_func at /home/codec/esp/esp-idf/components/newlib/assert.c:81
+0x400f1fe3: btstack_run_loop_base_add_timer at /home/codec/esp/esp-idf/components/btstack/src/btstack_run_loop.c:112
+0x400f2117: btstack_run_loop_add_timer at /home/codec/esp/esp-idf/components/btstack/src/btstack_run_loop.c:280
+0x400dd631: uni_bt_bredr_process_fsm at /home/codec/esp/bluepad32/src/components/bluepad32/bt/uni_bt_bredr.c:238
+0x400dda1d: uni_bt_bredr_on_l2cap_channel_opened at /home/codec/esp/bluepad32/src/components/bluepad32/bt/uni_bt_bredr.c:469
+0x400da889: uni_bt_packet_handler at /home/codec/esp/bluepad32/src/components/bluepad32/bt/uni_bt.c:486
+0x400f99d6: l2cap_dispatch_to_channel at /home/codec/esp/esp-idf/components/btstack/src/l2cap.c:1125
+ (inlined by) l2cap_emit_channel_opened at /home/codec/esp/esp-idf/components/btstack/src/l2cap.c:1166
+0x400fc5e5: l2cap_signaling_handler_channel at /home/codec/esp/esp-idf/components/btstack/src/l2cap.c:3546
+0x400fca23: l2cap_signaling_handler_dispatch at /home/codec/esp/esp-idf/components/btstack/src/l2cap.c:3783
+ (inlined by) l2cap_acl_classic_handler at /home/codec/esp/esp-idf/components/btstack/src/l2cap.c:4837
+ (inlined by) l2cap_acl_handler at /home/codec/esp/esp-idf/components/btstack/src/l2cap.c:4953
+ (inlined by) l2cap_acl_handler at /home/codec/esp/esp-idf/components/btstack/src/l2cap.c:4941
+0x400f7c4d: hci_emit_acl_packet at /home/codec/esp/esp-idf/components/btstack/src/hci.c:8041
+ (inlined by) acl_handler at /home/codec/esp/esp-idf/components/btstack/src/hci.c:1248
+ (inlined by) packet_handler at /home/codec/esp/esp-idf/components/btstack/src/hci.c:4814
+0x400fdff6: transport_deliver_packets at /home/codec/esp/esp-idf/components/btstack/btstack_port_esp32.c:200
+0x40101312: btstack_run_loop_freertos_execute at /home/codec/esp/esp-idf/components/btstack/platform/freertos/btstack_run_loop_freertos.c:172
+0x400f2183: btstack_run_loop_execute at /home/codec/esp/esp-idf/components/btstack/src/btstack_run_loop.c:310
+0x400da103: app_main at /home/codec/esp/rc-car/main/main.c:44
+0x40148fab: main_task at /home/codec/esp/esp-idf/components/freertos/app_startup.c:208
+0x400949cd: vPortTaskWrapper at /home/codec/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0m

@@ -1,0 +1,33 @@
+[0;33m--- esp-idf-monitor 1.5.0 on /dev/ttyUSB0 115200[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x40091128: btdm_sleep_check_duration at /home/codec/esp/esp-idf/components/bt/controller/esp32/bt.c:934
+[0m
+[0;33m--- 0x4009112f: r_assert at /home/codec/esp/esp-idf/components/bt/controller/esp32/bt.c:1959
+[0m
+[0;33m--- 0x4009112c: r_assert at /home/codec/esp/esp-idf/components/bt/controller/esp32/bt.c:1958
+0x40089573: r_assert_param at ??:?
+0x40090801: r_rwbt_isr at ??:?
+0x40090e17: r_rwbtdm_isr_wrapper at intc.c:?
+0x400837fe: hli_c_handler at /home/codec/esp/esp-idf/components/bt/controller/esp32/hli_api.c:92
+0x40083659: _highint4_stack_switch at /home/codec/esp/esp-idf/components/bt/controller/esp32/hli_vectors.S:177
+0x4008363b: xt_highint4 at /home/codec/esp/esp-idf/components/bt/controller/esp32/hli_vectors.S:161
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x40091128: btdm_sleep_check_duration at /home/codec/esp/esp-idf/components/bt/controller/esp32/bt.c:934
+[0m
+[0;33m--- 0x4009112f: r_assert at /home/codec/esp/esp-idf/components/bt/controller/esp32/bt.c:1959
+[0m
+[0;33m--- 0x4009112c: r_assert at /home/codec/esp/esp-idf/components/bt/controller/esp32/bt.c:1958
+0x40089573: r_assert_param at ??:?
+0x40090801: r_rwbt_isr at ??:?
+0x40090e17: r_rwbtdm_isr_wrapper at intc.c:?
+0x400837fe: hli_c_handler at /home/codec/esp/esp-idf/components/bt/controller/esp32/hli_api.c:92
+0x40083659: _highint4_stack_switch at /home/codec/esp/esp-idf/components/bt/controller/esp32/hli_vectors.S:177
+0x4008363b: xt_highint4 at /home/codec/esp/esp-idf/components/bt/controller/esp32/hli_vectors.S:161
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0m

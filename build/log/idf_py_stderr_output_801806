@@ -1,0 +1,8 @@
+CMake Error at /home/codec/esp/esp-idf/tools/cmake/project.cmake:414 (message):
+  Directory specified in EXTRA_COMPONENT_DIRS doesn't exist:
+  /home/codec/esp/rc-car/home/codec/esp/bluepad32/src/components
+Call Stack (most recent call first):
+  /home/codec/esp/esp-idf/tools/cmake/project.cmake:498 (__project_init)
+  CMakeLists.txt:13 (project)
+
+

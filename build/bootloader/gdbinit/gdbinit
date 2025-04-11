@@ -1,0 +1,2 @@
+source /home/codec/esp/rc-car/build/bootloader/gdbinit/symbols
+source /home/codec/esp/rc-car/build/bootloader/gdbinit/connect
