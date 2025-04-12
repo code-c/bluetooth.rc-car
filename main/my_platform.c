@@ -133,10 +133,21 @@ static void my_platform_on_controller_data(uni_hid_device_t *d,
   case UNI_CONTROLLER_CLASS_GAMEPAD:
     gp = &ctl->gamepad;
 
+    if ((!(gp->buttons & BUTTON_TRIGGER_L) ||
+         !(gp->buttons & BUTTON_TRIGGER_R)) &&
+        power) {
+
+      bdc_motor_coast(motor);
+      power = false;
+    }
+
     if (gp->buttons & BUTTON_A) {
+
       bdc_motor_brake(motor);
       power = false;
+
     } else {
+
       if ((gp->buttons & BUTTON_TRIGGER_L) && !power) {
         float_t speed = roundf((gp->brake * BDC_MCPWM_DUTY_MAX) / 1020.0);
         logi("reverse: %f\n", speed);
@@ -144,6 +155,7 @@ static void my_platform_on_controller_data(uni_hid_device_t *d,
         bdc_motor_set_speed(motor, speed);
         power = true;
       }
+
       if ((gp->buttons & BUTTON_TRIGGER_R) && !power) {
         float_t speed = roundf((gp->throttle * BDC_MCPWM_DUTY_MAX) / 1020.0);
         logi("forward: %f\n", speed);
@@ -152,8 +164,9 @@ static void my_platform_on_controller_data(uni_hid_device_t *d,
         power = true;
       }
     }
-    vTaskDelay(100);
-    power = false;
+    // vTaskDelay(pdMS_TO_TICKS(1));
+    // bdc_motor_coast(motor);
+    // power = false;
     if (gp->axis_x) {
       break;
     }
