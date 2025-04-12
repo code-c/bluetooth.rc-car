@@ -8,29 +8,40 @@
 #include "freertos/task.h"
 #include <math.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include <string.h>
 #include <uni.h>
 
 // Declarations
-#define BDC_MCPWM_GPIO_A 12                    // forward
-#define BDC_MCPWM_GPIO_B 13                    // reverse
-#define BDC_MCPWM_FREQ_HZ 25000                // frequency = 25kHz
-#define BDC_MCPWM_TIMER_RESOLUTION_HZ 80000000 // 160MHz, 1 tick = 0.1us
-#define BDC_MCPWM_DUTY_MAX                                                     \
-  (BDC_MCPWM_TIMER_RESOLUTION_HZ / BDC_MCPWM_FREQ_HZ) // in ticks
+#define DRIVEMOTOR_MCPWM_GPIO_A 12                    // forward
+#define DRIVEMOTOR_MCPWM_GPIO_B 13                    // reverse
+#define DRIVEMOTOR_MCPWM_FREQ_HZ 25000                // frequency = 25kHz
+#define DRIVEMOTOR_MCPWM_TIMER_RESOLUTION_HZ 80000000 // 160MHz, 1 tick = 0.1us
+#define DRIVEMOTOR_MCPWM_DUTY_MAX                                              \
+  (DRIVEMOTOR_MCPWM_TIMER_RESOLUTION_HZ / DRIVEMOTOR_MCPWM_FREQ_HZ) // in ticks
+#define STEERINGMOTOR_MCPWM_GPIO_A 32                               // right
+#define STEERINGMOTOR_MCPWM_GPIO_B 33                               // left
+#define STEERINGMOTOR_MCPWM_FREQ_HZ 25000 // frequency = 25kHz
+#define STEERINGMOTOR_MCPWM_TIMER_RESOLUTION_HZ                                \
+  80000000 // 160MHz, 1 tick = 0.1us
+#define STEERINGMOTOR_MCPWM_DUTY_MAX                                           \
+  (STEERINGMOTOR_MCPWM_TIMER_RESOLUTION_HZ /                                   \
+   STEERINGMOTOR_MCPWM_FREQ_HZ) // in ticks
 
 // brushless DC motor control setup
 static const bdc_motor_config_t motor_config = {
-    .pwm_freq_hz = BDC_MCPWM_FREQ_HZ,
-    .pwma_gpio_num = BDC_MCPWM_GPIO_A,
-    .pwmb_gpio_num = BDC_MCPWM_GPIO_B,
-};
-static const bdc_motor_mcpwm_config_t mcpwm_config = {
-    .group_id = 0,
-    .resolution_hz = BDC_MCPWM_TIMER_RESOLUTION_HZ,
+    .pwm_freq_hz = DRIVEMOTOR_MCPWM_FREQ_HZ,
+    .pwma_gpio_num = DRIVEMOTOR_MCPWM_GPIO_A,
+    .pwmb_gpio_num = DRIVEMOTOR_MCPWM_GPIO_B,
 };
 
-static bdc_motor_handle_t motor = NULL;
+static const bdc_motor_mcpwm_config_t mcpwm_config = {
+    .group_id = 0,
+    .resolution_hz = DRIVEMOTOR_MCPWM_TIMER_RESOLUTION_HZ,
+};
+
+static bdc_motor_handle_t drive_motor = NULL;
+static bdc_motor_handle_t steering_motor = NULL;
 
 // Custom "instance"
 typedef struct my_platform_instance_t {
@@ -46,8 +57,10 @@ static my_platform_instance_t *get_my_platform_instance(uni_hid_device_t *d);
 static void my_platform_init(int argc, const char **argv) {
   ARG_UNUSED(argc);
   ARG_UNUSED(argv);
-  bdc_motor_new_mcpwm_device(&motor_config, &mcpwm_config, &motor);
-  bdc_motor_enable(motor);
+  bdc_motor_new_mcpwm_device(&motor_config, &mcpwm_config, &drive_motor);
+  bdc_motor_new_mcpwm_device(&motor_config, &mcpwm_config, &steering_motor);
+  bdc_motor_enable(drive_motor);
+  bdc_motor_enable(steering_motor);
 #if 0
     uni_gamepad_mappings_t mappings = GAMEPAD_DEFAULT_MAPPINGS;
 
@@ -119,6 +132,7 @@ static uni_error_t my_platform_on_device_ready(uni_hid_device_t *d) {
 static void my_platform_on_controller_data(uni_hid_device_t *d,
                                            uni_controller_t *ctl) {
   static uint8_t power = false;
+  static uint8_t steering = false;
   uni_controller_t prev = {0};
   uni_gamepad_t *gp;
 
@@ -133,46 +147,76 @@ static void my_platform_on_controller_data(uni_hid_device_t *d,
   case UNI_CONTROLLER_CLASS_GAMEPAD:
     gp = &ctl->gamepad;
 
+    /*-------------------------------
+     * drive motor logic
+     * ------------------------------*/
+
+    // coast motor if previously powered but no triggers are depressed
     if ((!(gp->buttons & BUTTON_TRIGGER_L) ||
          !(gp->buttons & BUTTON_TRIGGER_R)) &&
         power) {
 
-      bdc_motor_coast(motor);
+      bdc_motor_coast(drive_motor);
       power = false;
     }
 
+    // HANDBRAKE takes priority and will imediately stop motors
     if (gp->buttons & BUTTON_A) {
 
-      bdc_motor_brake(motor);
+      bdc_motor_brake(drive_motor);
       power = false;
 
     } else {
-
+      // if left trigger is pressed then we reverse
+      // note: I beleive adding a vTaskDelay here might resolve issues with
+      // braking functionity where the idea is to reduce speed to zero
+      // correlating to trigger depression and then reverse. But it can also be
+      // done mathematically too?
       if ((gp->buttons & BUTTON_TRIGGER_L) && !power) {
-        float_t speed = roundf((gp->brake * BDC_MCPWM_DUTY_MAX) / 1020.0);
-        logi("reverse: %f\n", speed);
-        bdc_motor_reverse(motor);
-        bdc_motor_set_speed(motor, speed);
+        float_t speed =
+            roundf((gp->brake * DRIVEMOTOR_MCPWM_DUTY_MAX) / 1020.0);
+        // logi("reverse: %f\n", speed);
+        bdc_motor_reverse(drive_motor);
+        bdc_motor_set_speed(drive_motor, speed);
         power = true;
       }
-
+      // if right trigger is pressed then we drive forward
       if ((gp->buttons & BUTTON_TRIGGER_R) && !power) {
-        float_t speed = roundf((gp->throttle * BDC_MCPWM_DUTY_MAX) / 1020.0);
-        logi("forward: %f\n", speed);
-        bdc_motor_forward(motor);
-        bdc_motor_set_speed(motor, speed);
+        float_t speed =
+            roundf((gp->throttle * DRIVEMOTOR_MCPWM_DUTY_MAX) / 1020.0);
+        // logi("forward: %f\n", speed);
+        bdc_motor_forward(drive_motor);
+        bdc_motor_set_speed(drive_motor, speed);
         power = true;
       }
     }
-    // vTaskDelay(pdMS_TO_TICKS(1));
-    // bdc_motor_coast(motor);
-    // power = false;
-    if (gp->axis_x) {
-      break;
+
+    /*------------------------------------ *
+     * Steering motor logic                *
+     *------------------------------------ */
+    if (abs(gp->axis_x) > 1) {
+      if (gp->axis_x > 115) {
+        float_t turn_amount =
+            roundf((abs(gp->axis_x) * STEERINGMOTOR_MCPWM_DUTY_MAX) / 512);
+        logi("right turn: %f\n", turn_amount);
+        bdc_motor_reverse(steering_motor);
+        bdc_motor_set_speed(steering_motor, turn_amount);
+      }
+
+      if (gp->axis_x < -115) {
+        float_t turn_amount =
+            roundf((abs(gp->axis_x) * STEERINGMOTOR_MCPWM_DUTY_MAX) / 512);
+        logi("left turn: %f\n", turn_amount);
+        bdc_motor_forward(steering_motor);
+        bdc_motor_set_speed(steering_motor, turn_amount);
+      }
+
+      if (gp->axis_x > -30 && gp->axis_x < 30) {
+        bdc_motor_coast(steering_motor);
+      }
     }
     break;
   default:
-    power = false;
     break;
   }
 }
