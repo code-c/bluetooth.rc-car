@@ -1,0 +1,16 @@
+[0;33m--- esp-idf-monitor 1.5.0 on /dev/ttyUSB0 115200[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x40101342: btstack_run_loop_freertos_execute at /home/codec/esp/esp-idf/components/btstack/platform/freertos/btstack_run_loop_freertos.c:187
+0x400f2187: btstack_run_loop_execute at /home/codec/esp/esp-idf/components/btstack/src/btstack_run_loop.c:310
+0x400da0fb: app_main at /home/codec/esp/rc-car/main/main.c:44
+0x40148f7b: main_task at /home/codec/esp/esp-idf/components/freertos/app_startup.c:208
+0x400949cd: vPortTaskWrapper at /home/codec/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0m

@@ -1,0 +1,19 @@
+[1/11] Performing build step for 'bootloader'
+[1/1] cd /home/codec/esp/rc-car/build/bootloader/esp-idf/esptool_py && /home/codec/.espressif/python_env/idf5.2_py3.10_env/bin/python /home/codec/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 /home/codec/esp/rc-car/build/bootloader/bootloader.bin
+Bootloader binary size 0x6890 bytes. 0x770 bytes (7%) free.
+[2/11] No install step for 'bootloader'
+[3/11] Completed 'bootloader'
+[4/11] Building C object esp-idf/espressif__bdc_motor/CMakeFiles/__idf_espressif__bdc_motor.dir/src/bdc_motor_mcpwm_impl.c.obj
+[5/11] Linking C static library esp-idf/espressif__bdc_motor/libespressif__bdc_motor.a
+[6/11] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/my_platform.c.obj
+[7/11] Linking C static library esp-idf/main/libmain.a
+[8/11] Generating ld/sections.ld
+[9/11] Linking CXX executable bluepad32_esp32_example_app.elf
+[10/11] Generating binary image from built executable
+esptool.py v4.8.1
+Creating esp32 image...
+Merged 2 ELF sections
+Successfully created esp32 image.
+Generated /home/codec/esp/rc-car/build/bluepad32_esp32_example_app.bin
+[11/11] cd /home/codec/esp/rc-car/build/esp-idf/esptool_py && /home/codec/.espressif/python_env/idf5.2_py3.10_env/bin/python /home/codec/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/codec/esp/rc-car/build/partition_table/partition-table.bin /home/codec/esp/rc-car/build/bluepad32_esp32_example_app.bin
+bluepad32_esp32_example_app.bin binary size 0xbef40 bytes. Smallest app partition is 0x100000 bytes. 0x410c0 bytes (25%) free.

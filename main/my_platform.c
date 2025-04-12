@@ -6,17 +6,18 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"
 #include "freertos/task.h"
+#include <math.h>
 #include <stdint.h>
 #include <string.h>
 #include <uni.h>
 
 // Declarations
-#define BDC_MCPWM_GPIO_A 12                     // forward
-#define BDC_MCPWM_GPIO_B 13                     // reverse
-#define BDC_MCPWM_FREQ_HZ 24400                 // frequency = 25kHz
-#define BDC_MCPWM_TIMER_RESOLUTION_HZ 160000000 // 10MHz, 1 tick = 0.1us
+#define BDC_MCPWM_GPIO_A 12                    // forward
+#define BDC_MCPWM_GPIO_B 13                    // reverse
+#define BDC_MCPWM_FREQ_HZ 25000                // frequency = 25kHz
+#define BDC_MCPWM_TIMER_RESOLUTION_HZ 80000000 // 160MHz, 1 tick = 0.1us
 #define BDC_MCPWM_DUTY_MAX                                                     \
-  (BDC_MCPWM_TIMER_RESOLUTION_HZ / BDC_MCPWM_FREQ_HZ) - 1 // in ticks
+  (BDC_MCPWM_TIMER_RESOLUTION_HZ / BDC_MCPWM_FREQ_HZ) // in ticks
 
 // brushless DC motor control setup
 static const bdc_motor_config_t motor_config = {
@@ -135,28 +136,30 @@ static void my_platform_on_controller_data(uni_hid_device_t *d,
     if (gp->buttons & BUTTON_A) {
       bdc_motor_brake(motor);
       power = false;
-    } else if ((gp->buttons & BUTTON_TRIGGER_L) && !power) {
-      uint32_t speed = ((gp->brake * BDC_MCPWM_DUTY_MAX) / 1020);
-      logi("reverse: %d\n", speed);
-      bdc_motor_reverse(motor);
-      bdc_motor_set_speed(motor, speed);
-      power = true;
-    } else if ((gp->buttons & BUTTON_TRIGGER_R) && !power) {
-      uint32_t speed = ((gp->throttle * BDC_MCPWM_DUTY_MAX) / 1020);
-      logi("forward: %d\n", speed);
-      bdc_motor_forward(motor);
-      bdc_motor_set_speed(motor, speed);
-      power = true;
     } else {
-      logi("nothing: &d", BUTTON_TRIGGER_R);
-      power = false;
+      if ((gp->buttons & BUTTON_TRIGGER_L) && !power) {
+        float_t speed = roundf((gp->brake * BDC_MCPWM_DUTY_MAX) / 1020.0);
+        logi("reverse: %f\n", speed);
+        bdc_motor_reverse(motor);
+        bdc_motor_set_speed(motor, speed);
+        power = true;
+      }
+      if ((gp->buttons & BUTTON_TRIGGER_R) && !power) {
+        float_t speed = roundf((gp->throttle * BDC_MCPWM_DUTY_MAX) / 1020.0);
+        logi("forward: %f\n", speed);
+        bdc_motor_forward(motor);
+        bdc_motor_set_speed(motor, speed);
+        power = true;
+      }
     }
-
+    vTaskDelay(100);
+    power = false;
     if (gp->axis_x) {
       break;
     }
     break;
   default:
+    power = false;
     break;
   }
 }

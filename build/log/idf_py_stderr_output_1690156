@@ -1,0 +1,156 @@
+[0;33m--- esp-idf-monitor 1.5.0 on /dev/ttyUSB0 115200[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x40108066: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:223
+[0m
+[0;33m--- 0x4010804c: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:207
+0x40108066: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:223
+[0m
+[0;33m--- 0x40108063: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:214
+0x401091a5: mcpwm_new_timer at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_timer.c:125
+0x401056df: bdc_motor_new_mcpwm_device at /home/codec/esp/rc-car/managed_components/espressif__bdc_motor/src/bdc_motor_mcpwm_impl.c:143
+0x400da28b: my_platform_init at /home/codec/esp/rc-car/main/my_platform.c:48
+0x400dc30d: uni_platform_init at /home/codec/esp/bluepad32/src/components/bluepad32/platform/uni_platform.c:46
+0x400dd13b: uni_init at /home/codec/esp/bluepad32/src/components/bluepad32/uni_init.c:36
+0x400da0f8: app_main at /home/codec/esp/rc-car/main/main.c:41
+0x40148f7f: main_task at /home/codec/esp/esp-idf/components/freertos/app_startup.c:208
+0x400949cd: vPortTaskWrapper at /home/codec/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x40108066: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:223
+[0m
+[0;33m--- 0x4010804c: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:207
+0x40108066: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:223
+[0m
+[0;33m--- 0x40108063: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:214
+0x401091a5: mcpwm_new_timer at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_timer.c:125
+0x401056df: bdc_motor_new_mcpwm_device at /home/codec/esp/rc-car/managed_components/espressif__bdc_motor/src/bdc_motor_mcpwm_impl.c:143
+0x400da28b: my_platform_init at /home/codec/esp/rc-car/main/my_platform.c:48
+0x400dc30d: uni_platform_init at /home/codec/esp/bluepad32/src/components/bluepad32/platform/uni_platform.c:46
+0x400dd13b: uni_init at /home/codec/esp/bluepad32/src/components/bluepad32/uni_init.c:36
+0x400da0f8: app_main at /home/codec/esp/rc-car/main/main.c:41
+0x40148f7f: main_task at /home/codec/esp/esp-idf/components/freertos/app_startup.c:208
+0x400949cd: vPortTaskWrapper at /home/codec/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x40108066: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:223
+[0m
+[0;33m--- 0x4010804c: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:207
+0x40108066: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:223
+[0m
+[0;33m--- 0x40108063: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:214
+0x401091a5: mcpwm_new_timer at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_timer.c:125
+0x401056df: bdc_motor_new_mcpwm_device at /home/codec/esp/rc-car/managed_components/espressif__bdc_motor/src/bdc_motor_mcpwm_impl.c:143
+0x400da28b: my_platform_init at /home/codec/esp/rc-car/main/my_platform.c:48
+0x400dc30d: uni_platform_init at /home/codec/esp/bluepad32/src/components/bluepad32/platform/uni_platform.c:46
+0x400dd13b: uni_init at /home/codec/esp/bluepad32/src/components/bluepad32/uni_init.c:36
+0x400da0f8: app_main at /home/codec/esp/rc-car/main/main.c:41
+0x40148f7f: main_task at /home/codec/esp/esp-idf/components/freertos/app_startup.c:208
+0x400949cd: vPortTaskWrapper at /home/codec/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x40108066: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:223
+[0m
+[0;33m--- 0x4010804c: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:207
+0x40108066: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:223
+[0m
+[0;33m--- 0x40108063: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:214
+0x401091a5: mcpwm_new_timer at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_timer.c:125
+0x401056df: bdc_motor_new_mcpwm_device at /home/codec/esp/rc-car/managed_components/espressif__bdc_motor/src/bdc_motor_mcpwm_impl.c:143
+0x400da28b: my_platform_init at /home/codec/esp/rc-car/main/my_platform.c:48
+0x400dc30d: uni_platform_init at /home/codec/esp/bluepad32/src/components/bluepad32/platform/uni_platform.c:46
+0x400dd13b: uni_init at /home/codec/esp/bluepad32/src/components/bluepad32/uni_init.c:36
+0x400da0f8: app_main at /home/codec/esp/rc-car/main/main.c:41
+0x40148f7f: main_task at /home/codec/esp/esp-idf/components/freertos/app_startup.c:208
+0x400949cd: vPortTaskWrapper at /home/codec/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x40108066: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:223
+[0m
+[0;33m--- 0x4010804c: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:207
+0x40108066: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:223
+[0m
+[0;33m--- 0x40108063: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:214
+0x401091a5: mcpwm_new_timer at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_timer.c:125
+0x401056df: bdc_motor_new_mcpwm_device at /home/codec/esp/rc-car/managed_components/espressif__bdc_motor/src/bdc_motor_mcpwm_impl.c:143
+0x400da28b: my_platform_init at /home/codec/esp/rc-car/main/my_platform.c:48
+0x400dc30d: uni_platform_init at /home/codec/esp/bluepad32/src/components/bluepad32/platform/uni_platform.c:46
+0x400dd13b: uni_init at /home/codec/esp/bluepad32/src/components/bluepad32/uni_init.c:36
+0x400da0f8: app_main at /home/codec/esp/rc-car/main/main.c:41
+0x40148f7f: main_task at /home/codec/esp/esp-idf/components/freertos/app_startup.c:208
+0x400949cd: vPortTaskWrapper at /home/codec/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x40108066: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:223
+[0m
+[0;33m--- 0x4010804c: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:207
+0x40108066: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:223
+[0m
+[0;33m--- 0x40108063: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:214
+0x401091a5: mcpwm_new_timer at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_timer.c:125
+0x401056df: bdc_motor_new_mcpwm_device at /home/codec/esp/rc-car/managed_components/espressif__bdc_motor/src/bdc_motor_mcpwm_impl.c:143
+0x400da28b: my_platform_init at /home/codec/esp/rc-car/main/my_platform.c:48
+0x400dc30d: uni_platform_init at /home/codec/esp/bluepad32/src/components/bluepad32/platform/uni_platform.c:46
+0x400dd13b: uni_init at /home/codec/esp/bluepad32/src/components/bluepad32/uni_init.c:36
+0x400da0f8: app_main at /home/codec/esp/rc-car/main/main.c:41
+0x40148f7f: main_task at /home/codec/esp/esp-idf/components/freertos/app_startup.c:208
+0x400949cd: vPortTaskWrapper at /home/codec/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x40108066: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:223
+[0m
+[0;33m--- 0x4010804c: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:207
+0x40108066: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:223
+[0m
+[0;33m--- 0x40108063: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:214
+0x401091a5: mcpwm_new_timer at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_timer.c:125
+0x401056df: bdc_motor_new_mcpwm_device at /home/codec/esp/rc-car/managed_components/espressif__bdc_motor/src/bdc_motor_mcpwm_impl.c:143
+0x400da28b: my_platform_init at /home/codec/esp/rc-car/main/my_platform.c:48
+0x400dc30d: uni_platform_init at /home/codec/esp/bluepad32/src/components/bluepad32/platform/uni_platform.c:46
+0x400dd13b: uni_init at /home/codec/esp/bluepad32/src/components/bluepad32/uni_init.c:36
+0x400da0f8: app_main at /home/codec/esp/rc-car/main/main.c:41
+0x40148f7f: main_task at /home/codec/esp/esp-idf/components/freertos/app_startup.c:208
+0x400949cd: vPortTaskWrapper at /home/codec/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x40108066: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:223
+[0m
+[0;33m--- 0x4010804c: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:207
+0x40108066: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:223
+[0m
+[0;33m--- 0x40108063: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:214
+0x401091a5: mcpwm_new_timer at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_timer.c:125
+0x401056df: bdc_motor_new_mcpwm_device at /home/codec/esp/rc-car/managed_components/espressif__bdc_motor/src/bdc_motor_mcpwm_impl.c:143
+0x400da28b: my_platform_init at /home/codec/esp/rc-car/main/my_platform.c:48
+0x400dc30d: uni_platform_init at /home/codec/esp/bluepad32/src/components/bluepad32/platform/uni_platform.c:46
+0x400dd13b: uni_init at /home/codec/esp/bluepad32/src/components/bluepad32/uni_init.c:36
+0x400da0f8: app_main at /home/codec/esp/rc-car/main/main.c:41
+0x40148f7f: main_task at /home/codec/esp/esp-idf/components/freertos/app_startup.c:208
+0x400949cd: vPortTaskWrapper at /home/codec/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x40108066: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:223
+[0m
+[0;33m--- 0x4010804c: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:207
+0x40108066: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:223
+[0m
+[0;33m--- 0x40108063: mcpwm_set_prescale at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_com.c:214
+0x401091a5: mcpwm_new_timer at /home/codec/esp/esp-idf/components/driver/mcpwm/mcpwm_timer.c:125
+0x401056df: bdc_motor_new_mcpwm_device at /home/codec/esp/rc-car/managed_components/espressif__bdc_motor/src/bdc_motor_mcpwm_impl.c:143
+0x400da28b: my_platform_init at /home/codec/esp/rc-car/main/my_platform.c:48
+0x400dc30d: uni_platform_init at /home/codec/esp/bluepad32/src/components/bluepad32/platform/uni_platform.c:46
+0x400dd13b: uni_init at /home/codec/esp/bluepad32/src/components/bluepad32/uni_init.c:36
+0x400da0f8: app_main at /home/codec/esp/rc-car/main/main.c:41
+0x40148f7f: main_task at /home/codec/esp/esp-idf/components/freertos/app_startup.c:208
+0x400949cd: vPortTaskWrapper at /home/codec/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0m
