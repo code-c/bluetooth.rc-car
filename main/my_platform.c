@@ -34,7 +34,11 @@ static const bdc_motor_config_t motor_config = {
     .pwma_gpio_num = DRIVEMOTOR_MCPWM_GPIO_A,
     .pwmb_gpio_num = DRIVEMOTOR_MCPWM_GPIO_B,
 };
-
+static const bdc_motor_config_t steering_config = {
+    .pwm_freq_hz = STEERINGMOTOR_MCPWM_FREQ_HZ,
+    .pwma_gpio_num = STEERINGMOTOR_MCPWM_GPIO_A,
+    .pwmb_gpio_num = STEERINGMOTOR_MCPWM_GPIO_B,
+};
 static const bdc_motor_mcpwm_config_t mcpwm_config = {
     .group_id = 0,
     .resolution_hz = DRIVEMOTOR_MCPWM_TIMER_RESOLUTION_HZ,
@@ -58,7 +62,7 @@ static void my_platform_init(int argc, const char **argv) {
   ARG_UNUSED(argc);
   ARG_UNUSED(argv);
   bdc_motor_new_mcpwm_device(&motor_config, &mcpwm_config, &drive_motor);
-  bdc_motor_new_mcpwm_device(&motor_config, &mcpwm_config, &steering_motor);
+  bdc_motor_new_mcpwm_device(&steering_config, &mcpwm_config, &steering_motor);
   bdc_motor_enable(drive_motor);
   bdc_motor_enable(steering_motor);
 #if 0
@@ -132,7 +136,6 @@ static uni_error_t my_platform_on_device_ready(uni_hid_device_t *d) {
 static void my_platform_on_controller_data(uni_hid_device_t *d,
                                            uni_controller_t *ctl) {
   static uint8_t power = false;
-  static uint8_t steering = false;
   uni_controller_t prev = {0};
   uni_gamepad_t *gp;
 
@@ -146,7 +149,31 @@ static void my_platform_on_controller_data(uni_hid_device_t *d,
   switch (ctl->klass) {
   case UNI_CONTROLLER_CLASS_GAMEPAD:
     gp = &ctl->gamepad;
+    /*------------------------------------ *
+     * Steering motor logic                *
+     *------------------------------------ */
+    if (abs(gp->axis_x) > 1) {
+      if (gp->axis_x > 115) {
+        float_t turn_amount = roundf(
+            ((gp->axis_x - 115) * STEERINGMOTOR_MCPWM_DUTY_MAX) / (512 - 115));
+        logi("right turn: %f\n", turn_amount);
+        bdc_motor_reverse(steering_motor);
+        bdc_motor_set_speed(steering_motor, turn_amount);
+      }
 
+      if (gp->axis_x < -115) {
+        float_t turn_amount =
+            roundf(((abs(gp->axis_x) - 115) * STEERINGMOTOR_MCPWM_DUTY_MAX) /
+                   (512 - 115));
+        logi("left turn: %f\n", turn_amount);
+        bdc_motor_forward(steering_motor);
+        bdc_motor_set_speed(steering_motor, turn_amount);
+      }
+
+      if (gp->axis_x > -30 && gp->axis_x < 30) {
+        bdc_motor_coast(steering_motor);
+      }
+    }
     /*-------------------------------
      * drive motor logic
      * ------------------------------*/
@@ -167,20 +194,30 @@ static void my_platform_on_controller_data(uni_hid_device_t *d,
       power = false;
 
     } else {
-      // if left trigger is pressed then we reverse
-      // note: I beleive adding a vTaskDelay here might resolve issues with
-      // braking functionity where the idea is to reduce speed to zero
-      // correlating to trigger depression and then reverse. But it can also be
-      // done mathematically too?
+      if ((gp->buttons & BUTTON_TRIGGER_L) &&
+          (gp->buttons & BUTTON_TRIGGER_R) && !power) {
+        float_t speed = roundf(
+            ((gp->throttle - gp->brake) * DRIVEMOTOR_MCPWM_DUTY_MAX) / 1020.0);
+        // logi("forward: %f\n", speed);
+        if (speed <= 0) {
+          bdc_motor_brake(drive_motor);
+          power = false;
+          break;
+        } else {
+          bdc_motor_forward(drive_motor);
+          bdc_motor_set_speed(drive_motor, speed);
+          power = true;
+          break;
+        }
+      }
       if ((gp->buttons & BUTTON_TRIGGER_L) && !power) {
         float_t speed =
             roundf((gp->brake * DRIVEMOTOR_MCPWM_DUTY_MAX) / 1020.0);
-        // logi("reverse: %f\n", speed);
         bdc_motor_reverse(drive_motor);
         bdc_motor_set_speed(drive_motor, speed);
         power = true;
-      }
-      // if right trigger is pressed then we drive forward
+        break;
+      } // if right trigger is pressed then we drive forward
       if ((gp->buttons & BUTTON_TRIGGER_R) && !power) {
         float_t speed =
             roundf((gp->throttle * DRIVEMOTOR_MCPWM_DUTY_MAX) / 1020.0);
@@ -188,33 +225,10 @@ static void my_platform_on_controller_data(uni_hid_device_t *d,
         bdc_motor_forward(drive_motor);
         bdc_motor_set_speed(drive_motor, speed);
         power = true;
+        break;
       }
     }
 
-    /*------------------------------------ *
-     * Steering motor logic                *
-     *------------------------------------ */
-    if (abs(gp->axis_x) > 1) {
-      if (gp->axis_x > 115) {
-        float_t turn_amount =
-            roundf((abs(gp->axis_x) * STEERINGMOTOR_MCPWM_DUTY_MAX) / 512);
-        logi("right turn: %f\n", turn_amount);
-        bdc_motor_reverse(steering_motor);
-        bdc_motor_set_speed(steering_motor, turn_amount);
-      }
-
-      if (gp->axis_x < -115) {
-        float_t turn_amount =
-            roundf((abs(gp->axis_x) * STEERINGMOTOR_MCPWM_DUTY_MAX) / 512);
-        logi("left turn: %f\n", turn_amount);
-        bdc_motor_forward(steering_motor);
-        bdc_motor_set_speed(steering_motor, turn_amount);
-      }
-
-      if (gp->axis_x > -30 && gp->axis_x < 30) {
-        bdc_motor_coast(steering_motor);
-      }
-    }
     break;
   default:
     break;
