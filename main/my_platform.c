@@ -186,6 +186,12 @@ static void my_platform_on_controller_data(uni_hid_device_t *d,
       bdc_motor_coast(drive_motor);
       power = false;
     }
+    if (((gp->buttons & BUTTON_TRIGGER_L) &&
+         (gp->buttons & BUTTON_TRIGGER_R)) &&
+        power) {
+
+      bdc_motor_coast(drive_motor);
+    }
 
     // HANDBRAKE takes priority and will imediately stop motors
     if (gp->buttons & BUTTON_A) {
@@ -194,22 +200,6 @@ static void my_platform_on_controller_data(uni_hid_device_t *d,
       power = false;
 
     } else {
-      if ((gp->buttons & BUTTON_TRIGGER_L) &&
-          (gp->buttons & BUTTON_TRIGGER_R) && !power) {
-        float_t speed = roundf(
-            ((gp->throttle - gp->brake) * DRIVEMOTOR_MCPWM_DUTY_MAX) / 1020.0);
-        // logi("forward: %f\n", speed);
-        if (speed <= 0) {
-          bdc_motor_brake(drive_motor);
-          power = false;
-          break;
-        } else {
-          bdc_motor_forward(drive_motor);
-          bdc_motor_set_speed(drive_motor, speed);
-          power = true;
-          break;
-        }
-      }
       if ((gp->buttons & BUTTON_TRIGGER_L) && !power) {
         float_t speed =
             roundf((gp->brake * DRIVEMOTOR_MCPWM_DUTY_MAX) / 1020.0);
