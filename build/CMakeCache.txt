@@ -99,8 +99,8 @@ CMAKE_C_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 //Path to a program.
 CMAKE_DLLTOOL:FILEPATH=CMAKE_DLLTOOL-NOTFOUND
 
-//Flags used by the linker during all build types.
-CMAKE_EXE_LINKER_FLAGS:STRING=
+//Linker Base Flags
+CMAKE_EXE_LINKER_FLAGS:STRING='-nostartfiles '
 
 //Flags used by the linker during DEBUG builds.
 CMAKE_EXE_LINKER_FLAGS_DEBUG:STRING=
@@ -386,7 +386,7 @@ esp-idf_SOURCE_DIR:STATIC=/home/codec/esp/esp-idf
 everest_LIB_DEPENDS:STATIC=general;__idf_cxx;general;__idf_newlib;general;__idf_freertos;general;__idf_esp_hw_support;general;__idf_heap;general;__idf_log;general;__idf_soc;general;__idf_hal;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_system;general;__idf_xtensa;
 
 //Dependencies for the target
-mbedcrypto_LIB_DEPENDS:STATIC=general;__idf_cxx;general;__idf_newlib;general;__idf_freertos;general;__idf_esp_hw_support;general;__idf_heap;general;__idf_log;general;__idf_soc;general;__idf_hal;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_system;general;__idf_xtensa;general;everest;general;p256m;
+mbedcrypto_LIB_DEPENDS:STATIC=general;__idf_cxx;general;__idf_newlib;general;__idf_freertos;general;__idf_esp_hw_support;general;__idf_heap;general;__idf_log;general;__idf_soc;general;__idf_hal;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_system;general;__idf_xtensa;general;everest;general;p256m;general;idf::esp_security;
 
 //Dependencies for the target
 mbedtls_LIB_DEPENDS:STATIC=general;__idf_cxx;general;__idf_newlib;general;__idf_freertos;general;__idf_esp_hw_support;general;__idf_heap;general;__idf_log;general;__idf_soc;general;__idf_hal;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_system;general;__idf_xtensa;general;mbedx509;
@@ -543,7 +543,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=94
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=124
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -593,7 +593,7 @@ C_COMPILER_SUPPORTS_WFORMAT_SIGNEDNESS:INTERNAL=1
 //Details about finding Git
 FIND_PACKAGE_MESSAGE_DETAILS_Git:INTERNAL=[/usr/bin/git][v2.43.0()]
 //Details about finding Python3
-FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[/home/codec/.espressif/python_env/idf5.2_py3.10_env/bin/python][cfound components: Interpreter ][v3.10.15()]
+FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[/home/codec/.espressif/python_env/idf5.2_py3.10_env/bin/python][cfound components: Interpreter ][v3.12.7()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //ADVANCED property for variable: GIT_EXECUTABLE
@@ -616,7 +616,7 @@ _Python3_Compiler_REASON_FAILURE:INTERNAL=
 _Python3_Development_REASON_FAILURE:INTERNAL=
 _Python3_EXECUTABLE:INTERNAL=/home/codec/.espressif/python_env/idf5.2_py3.10_env/bin/python
 //Python3 Properties
-_Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;10;15;32;64;;;abi3;/home/codec/.pyenv/versions/3.10.15/lib/python3.10;/home/codec/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10;/home/codec/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages;/home/codec/.espressif/python_env/idf5.2_py3.10_env/lib/python3.10/site-packages
+_Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;12;7;32;64;;;abi3;/home/codec/.pyenv/versions/3.12.7/lib/python3.12;/home/codec/.espressif/python_env/idf5.2_py3.10_env/lib/python3.12;/home/codec/.espressif/python_env/idf5.2_py3.10_env/lib/python3.12/site-packages;/home/codec/.espressif/python_env/idf5.2_py3.10_env/lib/python3.12/site-packages
 _Python3_INTERPRETER_SIGNATURE:INTERNAL=fc0bc9e305b83a14d6d1f89f3da13d64
 //NumPy reason failure
 _Python3_NumPy_REASON_FAILURE:INTERNAL=
